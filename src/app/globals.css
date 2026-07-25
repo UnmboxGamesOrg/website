@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
-/* Tailwind CSS v4 Theme Token Configuration */
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
-  /* Brand & Core Color Tokens */
   --color-primary: #0052CC;
   --color-primary-hover: #003D99;
   --color-primary-dark: #38BDF8;
@@ -11,29 +11,23 @@
   --color-brand-cta: #FFCD35; /* CTAs, badges, notifications ONLY */
   --color-brand-dark-surface: #0B1E36;
 
-  /* Surface Tokens */
   --color-surface-light: #F8FAFC;
   --color-surface-card: #FFFFFF;
   --color-surface-dark: #020C1D;
   --color-surface-dark-card: #0B1E36;
 
-  /* Content & Text Tokens */
   --color-content-primary: #020C1D;
   --color-content-dark-primary: #F8FAFC;
   --color-content-muted: #475569;
   --color-content-dark-muted: #94A3B8;
 
-  /* Border Tokens */
   --color-border-subtle: #E2E8F0;
   --color-border-divider: #CBD5E1;
 
-  /* Typography */
   --font-sans: var(--font-atkinson), sans-serif;
 }
 
-/* Base Accessibility Utilities */
 @layer utilities {
-  /* Screen reader utility for accessible skip links and announcements */
   .sr-only {
     position: absolute;
     width: 1px;
