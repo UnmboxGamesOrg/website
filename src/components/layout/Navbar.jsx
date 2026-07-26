@@ -14,7 +14,6 @@ export default function Navbar() {
     return pathname.startsWith(href);
   };
 
-  // Lock body scroll while the sidebar is open, and close on route change
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -112,7 +111,6 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Overlay backdrop */}
       <div
         onClick={() => setIsMobileMenuOpen(false)}
         aria-hidden="true"
@@ -121,7 +119,6 @@ export default function Navbar() {
         }`}
       />
 
-      {/* Sidebar panel */}
       <div
         id="mobile-navigation-sidebar"
         role="dialog"
