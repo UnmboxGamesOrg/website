@@ -47,21 +47,23 @@ export default function GameSearch() {
   return (
     <section className="bg-surface-light py-12 transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header Title */}
         <h1 className="text-4xl font-extrabold tracking-tight text-brand-header sm:text-5xl">
           Our Library
         </h1>
 
-        {/* Filter Controls Bar */}
         <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          {/* Search Input Field */}
-          <div className="w-full max-w-md space-y-2 ">
-            <p
+          <form
+            role="search"
+            onSubmit={(e) => e.preventDefault()}
+            className="w-full max-w-md space-y-2"
+          >
+            <label
               htmlFor="game-search"
-              className="text-sm font-semibold text-content-primary mb-3"
+              className="block text-sm font-semibold text-content-primary mb-3 cursor-pointer"
             >
               Search Catalog
-            </p>
+            </label>
+
             <div className="relative">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-content-muted">
                 <svg
@@ -79,6 +81,7 @@ export default function GameSearch() {
                   />
                 </svg>
               </div>
+
               <input
                 id="game-search"
                 type="search"
@@ -88,15 +91,14 @@ export default function GameSearch() {
                 className="w-full rounded-lg border border-border-subtle bg-surface-card py-3 pl-10 pr-4 text-sm text-content-primary placeholder-content-muted shadow-sm transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
-          </div>
+          </form>
 
-          {/* Platform Toggle Pills */}
           <div className="space-y-2">
             <span
               id="platform-filter-label"
               className="block text-sm font-semibold text-content-primary"
             >
-              Platforms
+              Filters
             </span>
             <div
               role="group"
@@ -129,7 +131,6 @@ export default function GameSearch() {
           </div>
         </div>
 
-        {/* Live Filter Results Summary Announcement for Screen Readers */}
         <div className="sr-only" role="status" aria-live="polite">
           Showing {filteredGames.length} games
         </div>
