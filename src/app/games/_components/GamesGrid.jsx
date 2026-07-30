@@ -1,107 +1,48 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-const GAMES_DATA = [
-  {
-    id: "circuit-weaver",
-    title: "Circuit Weaver",
-    slug: "circuit-weaver",
-    description:
-      "Reconstruct broken logic gates and restore power to a fallen civilization in this...",
-    image: "/images/circuit-weaver.png",
-    tag: "LOGIC",
-    platforms: ["desktop", "mobile"],
-  },
-  {
-    id: "isometrica",
-    title: "Isometrica",
-    slug: "isometrica",
-    description:
-      "Challenge your spatial perception through 100+ levels of non-Euclidean geometry and",
-    image: "/images/isometrica.png",
-    tag: "SPATIAL",
-    platforms: ["desktop"],
-  },
-  {
-    id: "prime-sequence",
-    title: "Prime Sequence",
-    slug: "prime-sequence",
-    description:
-      "Unlock the secrets of number theory through addictive, fast-paced mathematical",
-    image: "/images/prime-sequence.png",
-    tag: "MATH",
-    platforms: ["mobile"],
-  },
-  {
-    id: "gearbox-theory",
-    title: "Gearbox Theory",
-    slug: "gearbox-theory",
-    description:
-      "Engineer complex mechanical solutions using realistic physics and intricate...",
-    image: "/images/gearbox-theory.png",
-    tag: "MECHANICAL",
-    platforms: ["desktop", "mobile"],
-  },
-  {
-    id: "zen-algorithm",
-    title: "Zen Algorithm",
-    slug: "zen-algorithm",
-    description:
-      "Find inner peace and logical clarity by optimizing data flows in a procedurally...",
-    image: "/images/zen-algorithm.png",
-    tag: "STRATEGY",
-    platforms: ["mobile"],
-  },
-  {
-    id: "the-syntax-void",
-    title: "The Syntax Void",
-    slug: "the-syntax-void",
-    description:
-      "Dive into a low-level programming adventure where your code is your only...",
-    image: "/images/the-syntax-void.png",
-    tag: "CODING",
-    platforms: ["desktop"],
-  },
-];
+import { getAllGames } from "@/data/gameData";
 
 export default function GamesGrid() {
+  const games = getAllGames();
+
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20 pt-10">
-      {GAMES_DATA.map((game) => (
+      {games.map((game) => (
         <article
           key={game.id}
           className="flex flex-col justify-between overflow-hidden rounded-xl border border-border-subtle bg-surface-card p-5 shadow-sm transition-all hover:shadow-md dark:border-border-subtle/20 dark:bg-surface-darkCard"
         >
           <div className="space-y-4">
-            
-            {/* Image Thumbnail with Floating Badge */}
+            {/* Game Card Hero Image */}
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-border-subtle/30">
               <Image
-                src={game.image}
-                alt={`Preview for ${game.title}`}
+                src={game.heroImage.src}
+                alt={game.heroImage.altText}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover object-center"
               />
-              
-              {/* Category Badge - Upper Right */}
-              <span className="absolute top-3 right-3 rounded bg-surface-card/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-content-primary backdrop-blur-sm dark:bg-surface-dark/90 dark:text-content-darkPrimary border border-border-subtle/50">
-                {game.tag}
-              </span>
+
+              {/* Category / Badge Tag */}
+              {game.badge && (
+                <span className="absolute top-3 right-3 rounded bg-surface-card/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-content-primary backdrop-blur-sm dark:bg-surface-dark/90 dark:text-content-darkPrimary border border-border-subtle/50">
+                  {game.badge}
+                </span>
+              )}
             </div>
 
-            {/* Header Title & Platform Icons */}
+            {/* Title & Platform Icons Header */}
             <div className="flex items-start justify-between gap-2 pt-1">
               <h2 className="text-lg font-extrabold text-brand-header dark:text-content-darkPrimary">
                 {game.title}
               </h2>
 
-              {/* Supported Platforms */}
               <div
                 className="flex items-center gap-1.5 text-content-muted dark:text-content-darkMuted"
                 aria-label={`Supported on ${game.platforms.join(" and ")}`}
               >
+                {/* Desktop Icon */}
                 {game.platforms.includes("desktop") && (
                   <svg
                     className="h-4 w-4"
@@ -118,6 +59,8 @@ export default function GamesGrid() {
                     />
                   </svg>
                 )}
+
+                {/* Mobile Icon */}
                 {game.platforms.includes("mobile") && (
                   <svg
                     className="h-4 w-4"
@@ -134,16 +77,34 @@ export default function GamesGrid() {
                     />
                   </svg>
                 )}
+
+                {/* Web Browser Icon */}
+                {game.platforms.includes("web") && (
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 21a9 9 0 100-18 9 9 0 000 18zM3.6 9h16.8M3.6 15h16.8"
+                    />
+                  </svg>
+                )}
               </div>
             </div>
 
-            {/* Truncated Description */}
+            {/* Short Description */}
             <p className="text-xs text-content-muted dark:text-content-darkMuted leading-relaxed line-clamp-2">
               {game.description}
             </p>
           </div>
 
-          {/* Details CTA Link */}
+          {/* View Details Action Link */}
           <div className="pt-6">
             <Link
               href={`/games/${game.slug}`}
