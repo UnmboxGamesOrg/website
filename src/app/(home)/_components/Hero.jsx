@@ -39,7 +39,7 @@ export default function Hero() {
           <div className="flex justify-center lg:justify-end">
             <div className="relative h-72 w-72 sm:h-96 sm:w-96">
               <Image
-                src="/icon.png"
+                src="/logo.png"
                 alt="Unmbox Games lightbulb emerging from an open box"
                 fill
                 priority
