@@ -7,8 +7,8 @@ const FOOTER_NAV = {
     { label: "Studio", href: "/studio" },
   ],
   legal: [
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" },
   ],
   resources: [
     { label: "Accessibility Statement", href: "/accessibility" },
