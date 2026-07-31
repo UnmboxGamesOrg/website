@@ -3,10 +3,24 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV_ITEMS } from "@/config/siteNav";
+
+const NAV_ITEMS = [
+  { label: "Home", href: "/" },
+  { label: "Games", href: "/games" },
+  {
+    label: "Support",
+    href: "/support",
+    children: [
+      { label: "Contact Us", href: "/support/contact-us" },
+      { label: "Delete Account", href: "/support/delete-account" },
+    ],
+  },
+];
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileSupportOpen, setIsMobileSupportOpen] = useState(false);
+  const [isDesktopSupportOpen, setIsDesktopSupportOpen] = useState(false);
   const pathname = usePathname();
 
   const isRouteActive = (href) => {
@@ -27,6 +41,7 @@ export default function Navbar() {
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsDesktopSupportOpen(false);
   }, [pathname]);
 
   return (
@@ -51,6 +66,76 @@ export default function Navbar() {
           >
             {NAV_ITEMS.map((item) => {
               const active = isRouteActive(item.href);
+              const hasChildren = item.children && item.children.length > 0;
+
+              if (hasChildren) {
+                return (
+                  <div
+                    key={item.href}
+                    className="relative"
+                    onMouseEnter={() => setIsDesktopSupportOpen(true)}
+                    onMouseLeave={() => setIsDesktopSupportOpen(false)}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setIsDesktopSupportOpen((prev) => !prev)}
+                      aria-expanded={isDesktopSupportOpen}
+                      aria-haspopup="true"
+                      className={`relative flex items-center gap-1 py-2 text-base font-semibold transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm ${
+                        active
+                          ? "text-brand-header dark:text-content-darkPrimary font-bold"
+                          : "text-content-muted hover:text-content-primary dark:text-content-darkMuted dark:hover:text-content-darkPrimary"
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      <svg
+                        className={`h-4 w-4 transition-transform ${
+                          isDesktopSupportOpen ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                        />
+                      </svg>
+                      {active && (
+                        <span
+                          className="absolute bottom-[-20px] left-0 h-[3px] w-full rounded-full bg-brand-header dark:bg-primary-dark"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </button>
+
+                    {isDesktopSupportOpen && (
+                      <div className="absolute top-full left-0 mt-2 w-56 rounded-xl border border-border-subtle bg-white dark:bg-slate-900 p-2 shadow-lg transition-all">
+                        {item.children.map((subItem) => {
+                          const subActive = pathname === subItem.href;
+                          return (
+                            <Link
+                              key={subItem.href}
+                              href={subItem.href}
+                              className={`block rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+                                subActive
+                                  ? "bg-primary/10 text-primary font-bold"
+                                  : "text-content-muted hover:bg-border-subtle/40 hover:text-content-primary dark:text-content-darkMuted dark:hover:text-content-darkPrimary"
+                              }`}
+                            >
+                              {subItem.label}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
               const linkClass = active
                 ? "text-brand-header dark:text-content-darkPrimary font-bold"
                 : "text-content-muted hover:text-content-primary dark:text-content-darkMuted dark:hover:text-content-darkPrimary";
@@ -65,7 +150,7 @@ export default function Navbar() {
                   {item.label}
                   {active && (
                     <span
-                      className="absolute bottom-[-20px] left-0 h-[3px] w-full rounded-full bg-brand-header dark:bg-primary-dar"
+                      className="absolute bottom-[-20px] left-0 h-[3px] w-full rounded-full bg-brand-header dark:bg-primary-dark"
                       aria-hidden="true"
                     />
                   )}
@@ -76,7 +161,7 @@ export default function Navbar() {
 
           <div className="hidden md:flex md:items-center">
             <Link
-              href="/explore"
+              href="/games"
               className="inline-flex items-center justify-center rounded-lg bg-brand-cta px-6 py-2.5 text-base font-bold text-surface-dark shadow-sm transition-all duration-150 hover:brightness-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-cta focus-visible:ring-offset-2 active:scale-[0.98]"
             >
               Explore
@@ -161,6 +246,61 @@ export default function Navbar() {
         >
           {NAV_ITEMS.map((item) => {
             const active = isRouteActive(item.href);
+            const hasChildren = item.children && item.children.length > 0;
+
+            if (hasChildren) {
+              return (
+                <div key={item.href} className="flex flex-col space-y-1">
+                  <button
+                    type="button"
+                    onClick={() => setIsMobileSupportOpen((prev) => !prev)}
+                    aria-expanded={isMobileSupportOpen}
+                    className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-base font-semibold text-content-muted dark:text-content-darkMuted"
+                  >
+                    <span>{item.label}</span>
+                    <svg
+                      className={`h-4 w-4 transition-transform ${
+                        isMobileSupportOpen ? "rotate-180" : ""
+                      }`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
+                  </button>
+
+                  {isMobileSupportOpen && (
+                    <div className="flex flex-col space-y-1 pl-4">
+                      {item.children.map((subItem) => {
+                        const subActive = pathname === subItem.href;
+                        return (
+                          <Link
+                            key={subItem.href}
+                            href={subItem.href}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+                              subActive
+                                ? "bg-brand-header text-white dark:bg-primary-dark dark:text-surface-dark"
+                                : "text-content-muted hover:bg-border-subtle/50 dark:text-content-darkMuted"
+                            }`}
+                          >
+                            {subItem.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
             const linkClass = active
               ? "bg-brand-header text-white dark:bg-primary-dark dark:text-surface-dark"
               : "text-content-muted hover:bg-border-subtle/50 dark:text-content-darkMuted";
@@ -180,7 +320,7 @@ export default function Navbar() {
 
           <div className="pt-4">
             <Link
-              href="/explore"
+              href="/games"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex w-full items-center justify-center rounded-lg bg-brand-cta py-3 text-base font-bold text-surface-dark"
             >
