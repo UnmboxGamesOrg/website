@@ -22,7 +22,7 @@ export const GAMES_CATALOG = [
     featured: true,
 
     heroImage: {
-      src: "/images/games/edge-born/hero.png",
+      src: "/edge.png",
       altText:
         "Metallic shield emblem featuring a central gold cross crosslet, representing Edge Born",
     },
@@ -108,7 +108,7 @@ export const GAMES_CATALOG = [
     featured: true,
 
     heroImage: {
-      src: "/images/games/dark-frequency/hero.png",
+      src: "/dark-frequency.png",
       altText:
         "Luminous glowing blue warrior holding a massive hammer surrounded by shockwave energy rings",
     },
@@ -194,7 +194,7 @@ export const GAMES_CATALOG = [
     featured: false,
 
     heroImage: {
-      src: "/images/games/shadows-of-the-circuit/hero.png",
+      src: "/shadow-of-the-circuit.png",
       altText:
         "Futuristic chrome title logo reading Shadows of the Circuit against a dark tech background",
     },
@@ -282,7 +282,7 @@ export const GAMES_CATALOG = [
     featured: false,
 
     heroImage: {
-      src: "/images/games/echo-chain/hero.png",
+      src: "/echo-chain.png",
       altText:
         "Colorful graphic title logo reading Echo Chain in rounded bubble lettering",
     },
@@ -370,7 +370,7 @@ export const GAMES_CATALOG = [
     featured: false,
 
     heroImage: {
-      src: "/images/games/multishoot/hero.png",
+      src: "/multi-shoot.png",
       altText:
         "Tactical soldier in dark body armor holding an assault rifle against an orange fire backdrop",
     },

@@ -14,7 +14,6 @@ export default function GamesGrid() {
           className="flex flex-col justify-between overflow-hidden rounded-xl border border-border-subtle bg-surface-card p-5 shadow-sm transition-all hover:shadow-md dark:border-border-subtle/20 dark:bg-surface-darkCard"
         >
           <div className="space-y-4">
-            {/* Game Card Hero Image */}
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-border-subtle/30">
               <Image
                 src={game.heroImage.src}
@@ -24,7 +23,6 @@ export default function GamesGrid() {
                 className="object-cover object-center"
               />
 
-              {/* Category / Badge Tag */}
               {game.badge && (
                 <span className="absolute top-3 right-3 rounded bg-surface-card/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-content-primary backdrop-blur-sm dark:bg-surface-dark/90 dark:text-content-darkPrimary border border-border-subtle/50">
                   {game.badge}
@@ -32,7 +30,6 @@ export default function GamesGrid() {
               )}
             </div>
 
-            {/* Title & Platform Icons Header */}
             <div className="flex items-start justify-between gap-2 pt-1">
               <h2 className="text-lg font-extrabold text-brand-header dark:text-content-darkPrimary">
                 {game.title}
@@ -42,7 +39,6 @@ export default function GamesGrid() {
                 className="flex items-center gap-1.5 text-content-muted dark:text-content-darkMuted"
                 aria-label={`Supported on ${game.platforms.join(" and ")}`}
               >
-                {/* Desktop Icon */}
                 {game.platforms.includes("desktop") && (
                   <svg
                     className="h-4 w-4"
@@ -60,7 +56,6 @@ export default function GamesGrid() {
                   </svg>
                 )}
 
-                {/* Mobile Icon */}
                 {game.platforms.includes("mobile") && (
                   <svg
                     className="h-4 w-4"
@@ -78,7 +73,6 @@ export default function GamesGrid() {
                   </svg>
                 )}
 
-                {/* Web Browser Icon */}
                 {game.platforms.includes("web") && (
                   <svg
                     className="h-4 w-4"
@@ -98,13 +92,11 @@ export default function GamesGrid() {
               </div>
             </div>
 
-            {/* Short Description */}
             <p className="text-xs text-content-muted dark:text-content-darkMuted leading-relaxed line-clamp-2">
               {game.description}
             </p>
           </div>
 
-          {/* View Details Action Link */}
           <div className="pt-6">
             <Link
               href={`/games/${game.slug}`}
