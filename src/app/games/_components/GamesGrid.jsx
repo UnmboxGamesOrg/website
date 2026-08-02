@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { fetchAllGames } from "@/services/gameService";
+import { ViewDetailsButton } from "../../../components/VIewDetailsButton";
 
 export default async function GamesGrid() {
   const games = await fetchAllGames();
@@ -9,7 +10,6 @@ export default async function GamesGrid() {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20 pt-10">
       {games.map((game) => {
-        // Fallbacks for snake_case / camelCase property normalization
         const heroSrc =
           game.hero_image?.src || game.heroImage?.src || "/placeholder.png";
         const heroAlt =
@@ -106,29 +106,7 @@ export default async function GamesGrid() {
               </p>
             </div>
 
-            <div className="pt-6">
-              <Link
-                href={`/games/${game.slug}`}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-header dark:text-content-darkPrimary hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
-                aria-label={`View details for ${game.title}`}
-              >
-                <span>View Details</span>
-                <svg
-                  className="h-3.5 w-3.5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                  />
-                </svg>
-              </Link>
-            </div>
+            <ViewDetailsButton slug={game.slug} title={game.title} />
           </article>
         );
       })}

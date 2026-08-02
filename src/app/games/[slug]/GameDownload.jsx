@@ -10,7 +10,6 @@ export default function GameDownload({ game }) {
     const userAgent = window.navigator.userAgent.toLowerCase();
 
     if (/iphone|ipad|ipod|macintosh|mac os/.test(userAgent)) {
-      // Check if iOS or macOS
       if (/iphone|ipad|ipod/.test(userAgent)) {
         setUserOS("ios");
       } else {

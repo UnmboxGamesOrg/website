@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { fetchLatestGames } from "@/services/gameService";
+import { ViewDetailsButton } from "@/components/VIewDetailsButton";
 
 export default async function FeaturedProjects() {
   const latestGames = await fetchLatestGames(2);
@@ -131,29 +132,7 @@ export default async function FeaturedProjects() {
                   )}
                 </div>
 
-                <div className="pt-8">
-                  <Link
-                    href={`/games/${game.slug}`}
-                    className="inline-flex items-center gap-2 text-base font-bold text-brand-header dark:text-content-dark-primary hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
-                    aria-label={`View details for ${game.title}`}
-                  >
-                    <span>View Details</span>
-                    <svg
-                      className="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                      />
-                    </svg>
-                  </Link>
-                </div>
+                <ViewDetailsButton slug={game.slug} title={game.title} />
               </article>
             );
           })}
