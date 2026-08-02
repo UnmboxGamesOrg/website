@@ -113,7 +113,7 @@ export default function Navbar() {
                     </button>
 
                     {isDesktopSupportOpen && (
-                      <div className="absolute top-full left-0 mt-2 w-56 rounded-xl border border-border-subtle bg-white dark:bg-slate-900 p-2 shadow-lg transition-all">
+                      <div className="absolute top-full left-0  w-56 rounded-xl border border-border-subtle bg-white dark:bg-slate-900 p-2 shadow-lg transition-all">
                         {item.children.map((subItem) => {
                           const subActive = pathname === subItem.href;
                           return (
