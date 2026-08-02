@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import GameContent from "./GameContent";
-import { getAllGames, getGameBySlug } from "@/data/gameData";
+import { fetchAllGames, fetchGameBySlug } from "@/services/gameService";
 
 export async function generateStaticParams() {
-  const games = getAllGames();
+  const games = await fetchAllGames(); // ← await added
   return games.map((game) => ({
     slug: game.slug,
   }));
@@ -11,7 +11,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const game = getGameBySlug(slug);
+  const game = await fetchGameBySlug(slug); // ← await added
 
   if (!game) {
     return {
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }) {
 
 export default async function GameDetailPage({ params }) {
   const { slug } = await params;
-  const game = getGameBySlug(slug);
+  const game = await fetchGameBySlug(slug); // ← await added
 
   if (!game) {
     notFound();
