@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
+import ContactForm from "../_components/ContactForm";
 
 export const metadata = {
   title: "Contact Us | Unmbox Games",
   description:
-    "Get in touch with Unmbox Games via email or join our Discord community.",
+    "Get in touch with Unmbox Games via email, contact form, or join our Discord community.",
 };
 
 export default function ContactUsPage() {
@@ -27,7 +28,7 @@ export default function ContactUsPage() {
             <li aria-hidden="true">&gt;</li>
             <li>
               <Link
-                href="/support/contact"
+                href="/support/contact-us"
                 className="hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
               >
                 Support
@@ -43,7 +44,6 @@ export default function ContactUsPage() {
           </ol>
         </nav>
 
-        {/* Header matching screenshot design */}
         <header className="text-center space-y-3 pb-2">
           <h1 className="text-4xl font-extrabold tracking-tight text-brand-header dark:text-content-darkPrimary sm:text-5xl uppercase">
             Contact Us
@@ -51,9 +51,7 @@ export default function ContactUsPage() {
           <div className="mx-auto h-1 w-36 bg-[#FFCD35]" aria-hidden="true" />
         </header>
 
-        {/* 2-Column Grid Layout */}
-        <main className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Email Support Card */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <section
             aria-labelledby="email-card-heading"
             className="flex flex-col justify-between rounded-xl border border-border-subtle dark:border-border-subtle/20 bg-white dark:bg-surface-darkCard p-8 shadow-sm transition-all hover:shadow-md"
@@ -178,7 +176,9 @@ export default function ContactUsPage() {
               </a>
             </div>
           </section>
-        </main>
+        </div>
+
+        <ContactForm />
       </div>
     </div>
   );
