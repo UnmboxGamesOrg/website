@@ -88,7 +88,6 @@ export default function GameDownload({ game }) {
         </p>
       )}
 
-      {/* Secondary Options */}
       <div className="flex flex-wrap gap-3 pt-2">
         {Object.entries(downloads).map(([key, downloadRaw]) => {
           const url = getDownloadUrl(downloadRaw);
