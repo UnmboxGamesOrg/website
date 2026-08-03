@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import GameDownload from "./GameDownload";
 
 export default function GameContent({ game }) {
   const primaryDownloadKey = Object.keys(game.downloads || {})[0];
@@ -10,6 +11,32 @@ export default function GameContent({ game }) {
     ? game.downloads[primaryDownloadKey]
     : null;
 
+
+    const downloads = game.downloads || {};
+  
+  // Extract primary download (prioritizes iOS, then PC, then any available link)
+  const primaryKey = downloads.ios ? "ios" : downloads.pc ? "pc" : Object.keys(downloads)[0];
+  const primaryRaw = downloads[primaryKey];
+  
+  // Helper to format key names to clean labels (e.g. "ios" -> "Download for iOS")
+  const getDownloadLabel = (key, val) => {
+    if (typeof val === "object" && val?.label) return val.label;
+    if (key === "ios") return "Download on the App Store";
+    if (key === "pc") return "PC Download (itch.io)";
+    if (key === "trailer") return "Watch Video Gameplay";
+    if (key === "community") return "Join Discord Community";
+    return `Download for ${key.toUpperCase()}`;
+  };
+
+  const getDownloadUrl = (val) => (typeof val === "string" ? val : val?.url || "#");
+  const getAriaLabel = (key, val, title) => {
+    if (typeof val === "object" && val?.ariaLabel) return val.ariaLabel;
+    return `Download ${title} on ${key} (opens in new tab)`;
+  };
+
+  const primaryUrl = primaryRaw ? getDownloadUrl(primaryRaw) : null;
+  const primaryLabel = primaryRaw ? getDownloadLabel(primaryKey, primaryRaw) : null;
+  const primaryAria = primaryRaw ? getAriaLabel(primaryKey, primaryRaw, game.title) : "";
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] py-12 transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
@@ -45,7 +72,7 @@ export default function GameContent({ game }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-5 space-y-8">
             <div className="space-y-2">
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-[#E2E8F0] bg-white shadow-sm">
+              <div className="relative aspect-16/10 w-full overflow-hidden rounded-xl border border-[#E2E8F0] bg-white shadow-sm">
                 <Image
                   src={game.heroImage.src}
                   alt={game.heroImage.altText}
@@ -138,7 +165,9 @@ export default function GameContent({ game }) {
             </div>
 
             <div className="space-y-4 leading-relaxed text-[#334155] text-base font-medium">
-              <p className="text-lg font-bold text-[#092D4A]">{game.tagline}</p>
+              <p className="text-lg font-bold text-[#092D4A]">
+                {game.description}
+              </p>
               <div className="whitespace-pre-line space-y-3 text-base text-[#475569]">
                 {game.longDescription}
               </div>
@@ -160,43 +189,7 @@ export default function GameContent({ game }) {
               </div>
             </div>
 
-            <div className="space-y-3 pt-2">
-              {primaryDownload ? (
-                <a
-                  href={primaryDownload.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={primaryDownload.ariaLabel}
-                  className="inline-flex items-center justify-center space-x-2 w-full sm:w-auto rounded-lg bg-[#FFCD35] px-8 py-4 text-base font-extrabold text-[#092D4A] shadow-md hover:bg-[#f3bf1c] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#092D4A]"
-                >
-                  <span>{primaryDownload.label}</span>
-                  <span aria-hidden="true">&darr;</span>
-                </a>
-              ) : (
-                <div className="inline-block rounded-lg bg-[#E2E8F0] px-6 py-3 text-sm font-bold text-[#64748B]">
-                  Release Pending / In Development
-                </div>
-              )}
-
-              <p className="text-xs font-semibold text-[#64748B]">
-                {game.version} — Included with Unmbox Studio Pass
-              </p>
-
-              <div className="flex flex-wrap gap-3 pt-2">
-                {Object.entries(game.downloads || {}).map(([key, download]) => (
-                  <a
-                    key={key}
-                    href={download.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={download.ariaLabel}
-                    className="text-xs font-bold text-[#092D4A] underline hover:text-[#092D4A]/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#092D4A] rounded-sm"
-                  >
-                    {download.label}
-                  </a>
-                ))}
-              </div>
-            </div>
+           <GameDownload game={game}/>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
               <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-sm space-y-1">

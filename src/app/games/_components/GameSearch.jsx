@@ -4,46 +4,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const ALL_GAMES = [
-  {
-    id: "the-grid",
-    title: "The Grid: Logic Reimagined",
-    slug: "the-grid",
-    description:
-      "A spatial reasoning challenge where connectivity is key. Navigate complex networks with high-contrast visual cues.",
-    image: "/images/the-grid.png",
-    tags: ["LOGIC", "SPATIAL"],
-    platforms: ["mobile", "pc"],
-  },
-  {
-    id: "circuit-flow",
-    title: "Circuit Flow",
-    slug: "circuit-flow",
-    description:
-      "Direct the flow of logic through sequential puzzles designed for maximum clarity with screen-reader support.",
-    image: "/images/circuit-flow.png",
-    tags: ["SEQUENTIAL", "HARD"],
-    platforms: ["pc"],
-  },
-];
-
-export default function GameSearch() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedPlatform, setSelectedPlatform] = useState("all");
-
-  const filteredGames = ALL_GAMES.filter((game) => {
-    const matchesSearch =
-      game.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      game.tags.some((tag) =>
-        tag.toLowerCase().includes(searchQuery.toLowerCase()),
-      );
-
-    const matchesPlatform =
-      selectedPlatform === "all" || game.platforms.includes(selectedPlatform);
-
-    return matchesSearch && matchesPlatform;
-  });
-
+export default function GameSearch({
+  searchQuery,
+  setSearchQuery,
+  selectedPlatform,
+  setSelectedPlatform,
+}) {
   return (
     <section className="bg-surface-light py-12 transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -132,7 +98,7 @@ export default function GameSearch() {
         </div>
 
         <div className="sr-only" role="status" aria-live="polite">
-          Showing {filteredGames.length} games
+          {/* Showing {filteredGames.length} games */}
         </div>
       </div>
     </section>
