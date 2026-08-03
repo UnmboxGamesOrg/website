@@ -1,11 +1,19 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { fetchAllGames } from "@/services/gameService";
 import { ViewDetailsButton } from "../../../components/VIewDetailsButton";
 
-export default async function GamesGrid() {
-  const games = await fetchAllGames();
+// Destructure { games = [] } from the props object
+export default function GamesGrid({ games = [] }) {
+  if (!games || games.length === 0) {
+    return (
+      <div className="mx-auto max-w-7xl px-4 py-16 text-center">
+        <p className="text-sm font-semibold text-content-muted dark:text-content-darkMuted">
+          No games match your search filters.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20 pt-10">
@@ -17,7 +25,7 @@ export default async function GamesGrid() {
 
         return (
           <article
-            key={game.id}
+            key={game.id || game.slug}
             className="flex flex-col justify-between overflow-hidden rounded-xl border border-border-subtle bg-surface-card p-5 shadow-sm transition-all hover:shadow-md dark:border-border-subtle/20 dark:bg-surface-darkCard"
           >
             <div className="space-y-4">
@@ -47,7 +55,8 @@ export default async function GamesGrid() {
                     className="flex items-center gap-1.5 text-content-muted dark:text-content-darkMuted"
                     aria-label={`Supported on ${game.platforms.join(" and ")}`}
                   >
-                    {game.platforms.includes("desktop") && (
+                    {(game.platforms.includes("desktop") ||
+                      game.platforms.includes("pc")) && (
                       <svg
                         className="h-4 w-4"
                         fill="none"
@@ -106,7 +115,9 @@ export default async function GamesGrid() {
               </p>
             </div>
 
-            <ViewDetailsButton slug={game.slug} title={game.title} />
+            <div className="pt-4 mt-auto">
+              <ViewDetailsButton slug={game.slug} title={game.title} />
+            </div>
           </article>
         );
       })}

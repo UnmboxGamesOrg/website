@@ -1,6 +1,6 @@
 import React from "react";
-import GameSearch from "./_components/GameSearch";
-import GamesGrid from "./_components/GamesGrid";
+import GamesCatalog from "./_components/GamesCatalog";
+import { fetchAllGames } from "@/services/gameService";
 
 export const metadata = {
   title: "Game Library",
@@ -13,13 +13,12 @@ export const metadata = {
   },
 };
 
-export default function GamesPage() {
-  return(
+export default async function GamesPage() {
+  const games = await fetchAllGames();
 
-    <>
-  <GameSearch />;
-  <GamesGrid/>
-    </>
-  )
-  
+  return (
+    <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-10">
+      <GamesCatalog initialGames={games} />
+    </main>
+  );
 }
