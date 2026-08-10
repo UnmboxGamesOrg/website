@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import GameDownload from "./GameDownload";
+import GameCarousel from "./GameCarousel";
 
 export default function GameContent({ game }) {
   const primaryDownloadKey = Object.keys(game.downloads || {})[0];
@@ -14,11 +15,9 @@ export default function GameContent({ game }) {
 
     const downloads = game.downloads || {};
   
-  // Extract primary download (prioritizes iOS, then PC, then any available link)
   const primaryKey = downloads.ios ? "ios" : downloads.pc ? "pc" : Object.keys(downloads)[0];
   const primaryRaw = downloads[primaryKey];
   
-  // Helper to format key names to clean labels (e.g. "ios" -> "Download for iOS")
   const getDownloadLabel = (key, val) => {
     if (typeof val === "object" && val?.label) return val.label;
     if (key === "ios") return "Download on the App Store";
@@ -71,21 +70,7 @@ export default function GameContent({ game }) {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-2">
-              <div className="relative aspect-16/10 w-full overflow-hidden rounded-xl border border-[#E2E8F0] bg-white shadow-sm">
-                <Image
-                  src={game.heroImage.src}
-                  alt={game.heroImage.altText}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover"
-                />
-              </div>
-              <p className="text-xs font-mono font-bold tracking-wider text-[#64748B] uppercase px-1">
-                01 // {game.title.toUpperCase()} INTERFACE
-              </p>
-            </div>
+            <GameCarousel game={game}/> 
 
             <section
               aria-labelledby="tech-specs-heading"
