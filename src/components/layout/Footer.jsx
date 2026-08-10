@@ -14,6 +14,15 @@ const FOOTER_NAV = {
     { label: "Accessibility Statement", href: "/accessibility" },
     { label: "Support", href: "/support" },
   ],
+  socials: [
+    { label: "Discord", href: "https://discord.gg/unmboxgames" },
+    { label: "Youtube", href: "https://www.youtube.com/@UnmboxGames" },
+    {
+      label: "Facebook",
+      href: "https://web.facebook.com/share/g/19P8TsQtF4",
+    },
+    { label: "Tiktok", href: "https://www.tiktok.com/@unmbox_games" },
+  ],
 };
 
 export default function Footer() {
@@ -37,9 +46,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Navigation Links Columns */}
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:gap-16">
-            {/* Explore Column */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4  lg:gap-10">
             <div>
               <h3 className="text-xs font-bold uppercase tracking-widest text-[#CBD5E1]">
                 Explore
@@ -58,7 +65,6 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Legal Column */}
             <div>
               <h3 className="text-xs font-bold uppercase tracking-widest text-[#CBD5E1]">
                 Legal
@@ -77,7 +83,6 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Resources Column */}
             <div>
               <h3 className="text-xs font-bold uppercase tracking-widest text-[#CBD5E1]">
                 Resources
@@ -95,13 +100,29 @@ export default function Footer() {
                 ))}
               </ul>
             </div>
+
+            <div>
+              <h3 className="text-xs font-bold uppercase tracking-widest text-[#CBD5E1]">
+                Connect
+              </h3>
+              <ul role="list" className="mt-4 space-y-3">
+                {FOOTER_NAV.socials.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-[#F8FAFC] transition-colors hover:text-brand-cta focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-cta rounded-sm"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
-        {/* Divider Line */}
         <div className="mt-12 border-t border-[#092D4A]" aria-hidden="true" />
 
-        {/* Copyright Section */}
         <div className="mt-8 flex items-center justify-between">
           <p className="text-sm text-[#CBD5E1]">
             &copy; {currentYear} Unmbox Games. All rights reserved.
