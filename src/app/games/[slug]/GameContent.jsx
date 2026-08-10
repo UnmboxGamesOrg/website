@@ -12,12 +12,15 @@ export default function GameContent({ game }) {
     ? game.downloads[primaryDownloadKey]
     : null;
 
+  const downloads = game.downloads || {};
 
-    const downloads = game.downloads || {};
-  
-  const primaryKey = downloads.ios ? "ios" : downloads.pc ? "pc" : Object.keys(downloads)[0];
+  const primaryKey = downloads.ios
+    ? "ios"
+    : downloads.pc
+      ? "pc"
+      : Object.keys(downloads)[0];
   const primaryRaw = downloads[primaryKey];
-  
+
   const getDownloadLabel = (key, val) => {
     if (typeof val === "object" && val?.label) return val.label;
     if (key === "ios") return "Download on the App Store";
@@ -27,15 +30,22 @@ export default function GameContent({ game }) {
     return `Download for ${key.toUpperCase()}`;
   };
 
-  const getDownloadUrl = (val) => (typeof val === "string" ? val : val?.url || "#");
+  console.log(game);
+
+  const getDownloadUrl = (val) =>
+    typeof val === "string" ? val : val?.url || "#";
   const getAriaLabel = (key, val, title) => {
     if (typeof val === "object" && val?.ariaLabel) return val.ariaLabel;
     return `Download ${title} on ${key} (opens in new tab)`;
   };
 
   const primaryUrl = primaryRaw ? getDownloadUrl(primaryRaw) : null;
-  const primaryLabel = primaryRaw ? getDownloadLabel(primaryKey, primaryRaw) : null;
-  const primaryAria = primaryRaw ? getAriaLabel(primaryKey, primaryRaw, game.title) : "";
+  const primaryLabel = primaryRaw
+    ? getDownloadLabel(primaryKey, primaryRaw)
+    : null;
+  const primaryAria = primaryRaw
+    ? getAriaLabel(primaryKey, primaryRaw, game.title)
+    : "";
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] py-12 transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
@@ -70,7 +80,7 @@ export default function GameContent({ game }) {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-5 space-y-8">
-            <GameCarousel game={game}/> 
+            <GameCarousel game={game} />
 
             <section
               aria-labelledby="tech-specs-heading"
@@ -138,9 +148,9 @@ export default function GameContent({ game }) {
           <div className="lg:col-span-7 space-y-8">
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                {game.badge && (
+                {game.genre && (
                   <span className="inline-block rounded-md bg-[#FFCD35] px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#092D4A]">
-                    {game.badge}
+                    {game.genre}
                   </span>
                 )}
               </div>
@@ -174,7 +184,7 @@ export default function GameContent({ game }) {
               </div>
             </div>
 
-           <GameDownload game={game}/>
+            <GameDownload game={game} />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
               <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-sm space-y-1">
@@ -186,14 +196,44 @@ export default function GameContent({ game }) {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-sm space-y-1">
-                <p className="text-xs font-bold uppercase tracking-wider text-[#64748B]">
-                  Difficulty
-                </p>
-                <p className="text-xl font-extrabold text-[#092D4A]">
-                  {game.difficulty}
-                </p>
-              </div>
+              {game.forum_url && (
+                <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-sm space-y-3">
+                  <div className="space-y-0.5">
+                    <h3 className="text-sm font-semibold text-slate-900">
+                      Community Forum
+                    </h3>
+                    <p className="text-xs text-slate-500">
+                      Join discussions for {game.title || "this game"}
+                    </p>
+                  </div>
+
+                  <Link
+                    href={game.forum_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-[2px] font-semibold text-white shadow-md transition-all hover:shadow-indigo-500/25 active:scale-[0.98]"
+                  >
+                    <span className="inline-flex w-full items-center justify-center gap-2 rounded-[6px] bg-slate-950 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-white transition-all hover:-translate-y-0.5">
+                      <span>
+                        Join {game.title ? `${game.title} Forum` : "Community"}
+                      </span>
+                      <svg
+                        className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2.5}
+                          d="M14 5l7 7m0 0l-7 7m7-7H3"
+                        />
+                      </svg>
+                    </span>
+                  </Link>
+                </div>
+              )}
             </div>
 
             {game.keyFeatures && game.keyFeatures.length > 0 && (

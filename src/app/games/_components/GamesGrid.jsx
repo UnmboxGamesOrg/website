@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ViewDetailsButton } from "../../../components/VIewDetailsButton";
 
-// Destructure { games = [] } from the props object
 export default function GamesGrid({ games = [] }) {
   if (!games || games.length === 0) {
     return (
@@ -38,9 +37,9 @@ export default function GamesGrid({ games = [] }) {
                   className="object-cover object-center"
                 />
 
-                {game.badge && (
+                {game.genre && (
                   <span className="absolute top-3 right-3 rounded bg-surface-card/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-content-primary backdrop-blur-sm dark:bg-surface-dark/90 dark:text-content-darkPrimary border border-border-subtle/50">
-                    {game.badge}
+                    {game.genre}
                   </span>
                 )}
               </div>

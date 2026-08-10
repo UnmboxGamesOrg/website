@@ -27,7 +27,6 @@ export default async function FeaturedProjects() {
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {latestGames.map((game) => {
-            // Normalize hero image object from Supabase or fallback
             const heroSrc =
               game.hero_image?.src || game.heroImage?.src || "/placeholder.png";
             const heroAlt =
@@ -47,9 +46,9 @@ export default async function FeaturedProjects() {
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover object-center"
                     />
-                    {game.badge && (
+                    {game.genre && (
                       <span className="absolute top-3 right-3 rounded bg-surface-card/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-content-primary backdrop-blur-sm dark:bg-surface-dark/90 dark:text-content-dark-primary border border-border-subtle/50">
-                        {game.badge}
+                        {game.genre}
                       </span>
                     )}
                   </div>
