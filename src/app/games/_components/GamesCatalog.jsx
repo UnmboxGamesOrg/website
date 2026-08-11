@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import GameSearch from "./GameSearch";
-import GamesGrid from "./GamesGrid";
+import GamesGrid from "./GameGrid";
 
 export default function GamesCatalog({ initialGames = [] }) {
   const [searchQuery, setSearchQuery] = useState("");

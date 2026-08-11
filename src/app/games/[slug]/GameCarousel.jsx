@@ -4,7 +4,18 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 
 export default function GameCarousel({ game }) {
-  const images = game?.images?.length ? game.images : [game.heroImage];
+  const images = game?.gallery?.length
+    ? game.gallery.map((item, idx) =>
+        typeof item === "string"
+          ? {
+              src: item,
+              altText: `${game.title || "Game"} screenshot ${idx + 1}`,
+            }
+          : item,
+      )
+    : game?.heroImage
+      ? [{ src: game.heroImage, altText: game.title || "Game image" }]
+      : [];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -13,9 +24,9 @@ export default function GameCarousel({ game }) {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   }, [images.length]);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
+  }, [images.length]);
 
   useEffect(() => {
     if (isHovered || images.length <= 1) return;
@@ -35,7 +46,13 @@ export default function GameCarousel({ game }) {
         className="group relative aspect-16/10 w-full overflow-hidden rounded-xl border border-[#E2E8F0] bg-white shadow-sm"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        onFocus={() => setIsHovered(true)}
+        onBlur={() => setIsHovered(false)}
       >
+        <div className="sr-only" aria-live="polite">
+          Slide {currentIndex + 1} of {images.length}
+        </div>
+
         <div
           className="flex h-full w-full transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -77,6 +94,7 @@ export default function GameCarousel({ game }) {
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
                   aria-label={`Go to slide ${idx + 1}`}
+                  aria-current={currentIndex === idx}
                   className={`h-2 rounded-full transition-all ${
                     currentIndex === idx
                       ? "w-5 bg-white"

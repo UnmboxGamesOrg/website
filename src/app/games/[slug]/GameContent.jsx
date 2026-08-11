@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import GameDownload from "./GameDownload";
 import GameCarousel from "./GameCarousel";
+import GameTrailer from "./_components/GameTrailer";
 
 export default function GameContent({ game }) {
   const primaryDownloadKey = Object.keys(game.downloads || {})[0];
@@ -81,16 +82,17 @@ export default function GameContent({ game }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-5 space-y-8">
             <GameCarousel game={game} />
+            <GameTrailer game={game}/>
 
             <section
-              aria-labelledby="tech-specs-heading"
+              aria-labelledby="specs-heading"
               className="rounded-xl border border-[#E2E8F0] bg-white p-6 shadow-sm space-y-4"
             >
               <h2
-                id="tech-specs-heading"
+                id="specs-heading"
                 className="text-xl font-bold text-[#092D4A]"
               >
-                Technical Specs
+                Specs
               </h2>
               <div className="h-0.5 w-full bg-[#E2E8F0]" aria-hidden="true" />
 
@@ -158,6 +160,7 @@ export default function GameContent({ game }) {
                 {game.title}
               </h1>
             </div>
+            <GameDownload game={game} />
 
             <div className="space-y-4 leading-relaxed text-[#334155] text-base font-medium">
               <p className="text-lg font-bold text-[#092D4A]">
@@ -183,8 +186,6 @@ export default function GameContent({ game }) {
                 ))}
               </div>
             </div>
-
-            <GameDownload game={game} />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
               <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-sm space-y-1">
