@@ -21,7 +21,7 @@ export default function GamesGrid({ games = [] }) {
         
 
         return (
-         <GameCard key={game.slug} game={game} />
+         <GameCard key={game.id} game={game} />
         );
       })}
     </div>
