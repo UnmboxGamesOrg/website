@@ -166,7 +166,7 @@ export default function ContactUsPage() {
           </section>
         </div>
 
-        <ContactForm />
+        {/* <ContactForm /> */}
       </div>
     </div>
   );
