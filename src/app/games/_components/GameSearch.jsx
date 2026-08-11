@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import React from "react";
 
 export default function GameSearch({
   searchQuery,
@@ -25,7 +23,7 @@ export default function GameSearch({
           >
             <label
               htmlFor="game-search"
-              className="block text-sm font-semibold text-content-primary mb-3 cursor-pointer"
+              className="mb-3 block cursor-pointer text-sm font-semibold text-content-primary"
             >
               Search Catalog
             </label>
@@ -69,11 +67,12 @@ export default function GameSearch({
             <div
               role="group"
               aria-labelledby="platform-filter-label"
-              className="inline-flex rounded-lg border border-border-subtle bg-surface-card p-1 shadow-sm"
+              className="inline-flex flex-wrap rounded-lg border border-border-subtle bg-surface-card p-1 shadow-sm"
             >
               {[
                 { id: "all", label: "All" },
-                { id: "mobile", label: "Mobile" },
+                { id: "ios", label: "iOS" },
+                { id: "android", label: "Android" },
                 { id: "pc", label: "PC" },
               ].map((platform) => {
                 const isActive = selectedPlatform === platform.id;
@@ -83,7 +82,7 @@ export default function GameSearch({
                     type="button"
                     onClick={() => setSelectedPlatform(platform.id)}
                     aria-pressed={isActive}
-                    className={`rounded-md px-5 py-2 text-sm font-bold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                    className={`rounded-md px-4 py-2 cursor-pointer text-sm font-bold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                       isActive
                         ? "bg-brand-header text-white shadow"
                         : "text-content-primary hover:bg-border-subtle/50"
@@ -98,7 +97,6 @@ export default function GameSearch({
         </div>
 
         <div className="sr-only" role="status" aria-live="polite">
-          {/* Showing {filteredGames.length} games */}
         </div>
       </div>
     </section>

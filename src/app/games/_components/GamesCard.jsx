@@ -56,64 +56,109 @@ export function GameCard({ game }) {
             {game.title}
           </h2>
 
-          {game.platforms && (
-            <div
-              className="flex items-center gap-1.5 text-content-muted dark:text-content-darkMuted"
-              aria-label={`Supported on ${game.platforms.join(" and ")}`}
-            >
-              {(game.platforms.includes("desktop") ||
-                game.platforms.includes("pc")) && (
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 17V19M15 19V17M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-              )}
+          {game.downloads &&
+            Object.keys(game.downloads).length > 0 &&
+            (() => {
+              const downloadKeys = Object.keys(game.downloads).map((k) =>
+                k.toLowerCase(),
+              );
 
-              {game.platforms.includes("mobile") && (
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-                  />
-                </svg>
-              )}
+              const hasDesktop = downloadKeys.some((k) =>
+                [
+                  "pc",
+                  "desktop",
+                  "windows",
+                  "mac",
+                  "linux",
+                  "steam",
+                  "itch",
+                ].includes(k),
+              );
+              const hasMobile = downloadKeys.some((k) =>
+                [
+                  "ios",
+                  "appstore",
+                  "android",
+                  "playstore",
+                  "galaxy",
+                  "galaxystore",
+                  "mobile",
+                ].includes(k),
+              );
+              const hasWeb = downloadKeys.some((k) =>
+                ["web", "browser"].includes(k),
+              );
 
-              {game.platforms.includes("web") && (
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  aria-hidden="true"
+              // Build dynamic label e.g., "Supported on Desktop and Mobile"
+              const platformLabels = [
+                hasDesktop && "Desktop",
+                hasMobile && "Mobile",
+                hasWeb && "Web",
+              ].filter(Boolean);
+
+              if (!platformLabels.length) return null;
+
+              return (
+                <div
+                  className="flex items-center gap-1.5 text-content-muted dark:text-content-darkMuted"
+                  aria-label={`Supported on ${platformLabels.join(" and ")}`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 21a9 9 0 100-18 9 9 0 000 18zM3.6 9h16.8M3.6 15h16.8"
-                  />
-                </svg>
-              )}
-            </div>
-          )}
+                  {/* Desktop / PC Icon */}
+                  {hasDesktop && (
+                    <svg
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 17V19M15 19V17M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                  )}
+
+                  {/* Mobile Icon (Triggers for iOS or Android links) */}
+                  {hasMobile && (
+                    <svg
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                      />
+                    </svg>
+                  )}
+
+                  {/* Web / Browser Icon */}
+                  {hasWeb && (
+                    <svg
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 21a9 9 0 100-18 9 9 0 000 18zM3.6 9h16.8M3.6 15h16.8"
+                      />
+                    </svg>
+                  )}
+                </div>
+              );
+            })()}
         </div>
 
         <p className="text-xs text-content-muted dark:text-content-darkMuted leading-relaxed line-clamp-2">
