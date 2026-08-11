@@ -88,7 +88,7 @@ export default function GameDownload({ game }) {
         </p>
       )}
 
-      <div className="flex flex-wrap gap-3 pt-2">
+      {/* <div className="flex flex-wrap gap-3 pt-2">
         {Object.entries(downloads).map(([key, downloadRaw]) => {
           const url = getDownloadUrl(downloadRaw);
           const label = getDownloadLabel(key, downloadRaw);
@@ -107,7 +107,7 @@ export default function GameDownload({ game }) {
             </a>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 }

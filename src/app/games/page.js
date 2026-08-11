@@ -1,6 +1,6 @@
 import React from "react";
-import GamesCatalog from "./_components/GamesCatalog";
 import { fetchAllGames } from "@/services/gameService";
+import GamesCatalog from "./_components/GamesCatalog";
 
 export const metadata = {
   title: "Game Library",

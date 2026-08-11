@@ -28,7 +28,7 @@ export default function Hero() {
               </Link>
 
               <Link
-                href="/support"
+                href="/support/contact-us"
                 className="inline-flex items-center justify-center rounded-md border-2 border-brand-header dark:border-content-dark-primary bg-transparent px-8 py-3.5 text-base font-bold text-brand-header dark:text-content-dark-primary transition-all hover:bg-brand-header hover:text-white dark:hover:bg-content-dark-primary dark:hover:text-surface-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-header dark:focus-visible:ring-content-dark-primary focus-visible:ring-offset-2 active:scale-[0.98]"
               >
                 Contact Us
