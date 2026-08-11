@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import ContactForm from "../_components/ContactForm";
+import { FaDiscord } from "react-icons/fa";
+
 
 export const metadata = {
   title: "Contact Us | Unmbox Games",
@@ -113,27 +115,13 @@ export default function ContactUsPage() {
             </div>
           </section>
 
-          {/* Discord Community Card */}
           <section
             aria-labelledby="discord-card-heading"
             className="flex flex-col justify-between rounded-xl border border-border-subtle dark:border-border-subtle/20 bg-white dark:bg-surface-darkCard p-8 shadow-sm transition-all hover:shadow-md"
           >
             <div className="space-y-4">
               <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-500">
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.72m12 0a5.971 5.971 0 00-.941-3.197M6 18.72a9.094 9.094 0 01-3.741-.479 3 3 0 014.682-2.72m-.94 3.198l-.001.031c0 .225.012.447.037.666A11.944 11.944 0 0012 21c2.17 0 4.207-.576 5.963-1.584A6.062 6.062 0 0018 18.72M12 7a4 4 0 100-8 4 4 0 000 8z"
-                  />
-                </svg>
+                <FaDiscord className="h-5 w-5 text-[#5865F2]" />{" "}
               </div>
 
               <div className="space-y-1">

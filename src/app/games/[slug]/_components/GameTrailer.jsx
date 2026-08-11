@@ -1,25 +1,34 @@
 "use client";
 
 export default function GameTrailer({ game }) {
-  const trailerUrl = game?.trailerUrl;
+  const trailerUrl = game?.game_trailer;
 
   if (!trailerUrl) return null;
 
-  const getYouTubeEmbedUrl = (url) => {
-    let videoId = "";
+  console.log(trailerUrl);
 
-    if (url.includes("youtu.be/")) {
-      videoId = url.split("youtu.be/")[1]?.split("?")[0];
-    } else if (url.includes("watch?v=")) {
-      videoId = url.split("watch?v=")[1]?.split("&")[0];
-    } else if (url.includes("/embed/")) {
-      videoId = url.split("/embed/")[1]?.split("?")[0];
-    }
+  const getYouTubeEmbedUrl = (url) => {
+    const getVideoId = (url) => {
+      if (url.includes("youtu.be/"))
+        return url.split("youtu.be/")[1]?.split("?")[0];
+      if (url.includes("watch?v="))
+        return url.split("watch?v=")[1]?.split("&")[0];
+      if (url.includes("/embed/"))
+        return url.split("/embed/")[1]?.split("?")[0];
+      if (url.includes("/shorts/"))
+        return url.split("/shorts/")[1]?.split("?")[0];
+      return null;
+    };
+
+    const videoId = getVideoId(url)
 
     return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+
   };
 
   const embedUrl = getYouTubeEmbedUrl(trailerUrl);
+
+  console.log(embedUrl);
 
   if (!embedUrl) return null;
 
