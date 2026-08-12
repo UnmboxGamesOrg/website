@@ -60,7 +60,7 @@ export default function GameCarousel({ game }) {
           {images.map((img, idx) => (
             <div key={idx} className="relative h-full w-full flex-shrink-0">
               <Image
-                src={img.src}
+                src={img.src ? img.src : "/logo.png"}
                 alt={img.altText || `Slide ${idx + 1}`}
                 fill
                 priority={idx === 0}

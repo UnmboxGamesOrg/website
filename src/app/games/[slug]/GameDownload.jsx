@@ -82,32 +82,6 @@ export default function GameDownload({ game }) {
         </div>
       )}
 
-      {game.version && (
-        <p className="text-xs font-semibold text-[#64748B]">
-          {game.version} — Included with Unmbox Studio Pass
-        </p>
-      )}
-
-      {/* <div className="flex flex-wrap gap-3 pt-2">
-        {Object.entries(downloads).map(([key, downloadRaw]) => {
-          const url = getDownloadUrl(downloadRaw);
-          const label = getDownloadLabel(key, downloadRaw);
-          const ariaLabel = getAriaLabel(key, downloadRaw, game.title);
-
-          return (
-            <a
-              key={key}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={ariaLabel}
-              className="text-xs font-bold text-[#092D4A] underline hover:text-[#092D4A]/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#092D4A] rounded-sm"
-            >
-              {label}
-            </a>
-          );
-        })}
-      </div> */}
     </div>
   );
 }
