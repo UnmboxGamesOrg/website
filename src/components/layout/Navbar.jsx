@@ -15,6 +15,7 @@ const NAV_ITEMS = [
       { label: "Delete Account", href: "/support/delete-account" },
     ],
   },
+  { label: "Hire Us", href: "/hire-us" },
 ];
 
 export default function Navbar() {
