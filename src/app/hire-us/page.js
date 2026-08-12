@@ -165,7 +165,6 @@ export default function HireUsPage() {
             </p>
           </div>
 
-          {/* 2x2 Skills Grid */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {SKILLS.map((skill) => (
               <div
