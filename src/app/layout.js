@@ -11,9 +11,9 @@ const atkinson = Atkinson_Hyperlegible_Next({
 });
 
 export const metadata = {
-  title: "Unmbox Games | Discover & Play Unboxed Web Games",
+  title: "Unmbox Games | Exciting & Immersive Games For Everyone Discover and play unique games across all genres",
   description:
-    "Your premier platform for discovering and playing accessible web games.",
+    "Your premier platform for discovering and playing accessible games.",
 };
 
 export default function RootLayout({ children }) {
