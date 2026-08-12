@@ -5,8 +5,8 @@ import Link from "next/link";
 import GameDownload from "./GameDownload";
 import GameCarousel from "./GameCarousel";
 import GameTrailer from "./_components/GameTrailer";
+import FeaturesSection from "./FeaturesSection";
 
-// Platform & Icon Mapping Dictionary
 const STORE_PLATFORMS = [
   {
     id: "appstore",
@@ -79,13 +79,13 @@ const STORE_PLATFORMS = [
 export default function GameContent({ game }) {
   if (!game) return null;
 
-  // Safe Fallbacks for Array Fields
   const technicalSpecs = game.technicalSpecs || [];
   const accessibilityFeatures = game.accessibilityFeatures || [];
   const keyFeatures = game.keyFeatures || [];
   const downloads = game.downloads || {};
 
-  // Extract detected store platforms & their links
+  console.log(technicalSpecs);
+
   const downloadEntries = Object.entries(downloads);
   const detectedPlatforms = STORE_PLATFORMS.map((store) => {
     const match = downloadEntries.find(([key]) =>
@@ -97,7 +97,6 @@ export default function GameContent({ game }) {
   return (
     <div className="min-h-screen bg-[#F8FAFC] py-12 text-[#0F172A] transition-colors duration-200">
       <div className="mx-auto max-w-7xl space-y-10 px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
           className="text-sm font-semibold text-[#64748B]"
@@ -127,85 +126,20 @@ export default function GameContent({ game }) {
           </ol>
         </nav>
 
-        {/* Main Content Layout */}
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12">
-          {/* Left Column (Carousel, Trailer, Specs, Accessibility) */}
           <div className="space-y-8 lg:col-span-5">
             <GameCarousel game={game} />
             <GameTrailer game={game} />
 
-            {/* Technical Specs Section */}
-            {technicalSpecs.length > 0 && (
-              <section
-                aria-labelledby="specs-heading"
-                className="space-y-4 rounded-xl border border-[#E2E8F0] bg-white p-6 shadow-sm"
-              >
-                <h2
-                  id="specs-heading"
-                  className="text-xl font-bold text-[#092D4A]"
-                >
-                  Specs
-                </h2>
-                <div className="h-0.5 w-full bg-[#E2E8F0]" aria-hidden="true" />
-
-                <dl className="space-y-3.5 text-sm font-medium">
-                  {technicalSpecs.map((spec, index) => (
-                    <div
-                      key={index}
-                      className="flex items-start justify-between gap-4"
-                    >
-                      <dt className="text-[#64748B]">{spec.label}:</dt>
-                      <dd className="text-right font-bold text-[#0F172A]">
-                        {spec.value}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </section>
-            )}
-
-            {/* Accessibility Section */}
-            {accessibilityFeatures.length > 0 && (
-              <section
-                aria-labelledby="accessibility-heading"
-                className="space-y-4 rounded-xl border border-[#E2E8F0] bg-white p-6 shadow-sm"
-              >
-                <h2
-                  id="accessibility-heading"
-                  className="text-xl font-bold text-[#092D4A]"
-                >
-                  Accessibility
-                </h2>
-                <div className="h-0.5 w-full bg-[#E2E8F0]" aria-hidden="true" />
-
-                <ul role="list" className="space-y-4">
-                  {accessibilityFeatures.map((a11y, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start space-x-3 text-sm"
-                    >
-                      <span
-                        className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#092D4A] text-xs font-bold text-white"
-                        aria-hidden="true"
-                      >
-                        ✓
-                      </span>
-                      <div>
-                        <p className="font-bold text-[#092D4A]">{a11y.title}</p>
-                        <p className="mt-0.5 text-xs leading-relaxed text-[#475569]">
-                          {a11y.description}
-                        </p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
+            <div className="hidden md:block">
+              <FeaturesSection
+                technicalSpecs={technicalSpecs}
+                accessibilityFeatures={accessibilityFeatures}
+              />
+            </div>
           </div>
 
-          {/* Right Column (Hero Details, Downloads, Description, Platforms, Forum CTA) */}
           <div className="space-y-8 lg:col-span-7">
-            {/* Header Info */}
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 {game.genre && (
@@ -219,10 +153,8 @@ export default function GameContent({ game }) {
               </h1>
             </div>
 
-            {/* Download Buttons Block */}
             <GameDownload game={game} />
 
-            {/* Game Description */}
             <div className="space-y-4 text-base font-medium leading-relaxed text-[#334155]">
               {game.description && (
                 <p className="text-lg font-bold text-[#092D4A]">
@@ -236,7 +168,6 @@ export default function GameContent({ game }) {
               )}
             </div>
 
-            {/* Availability Platforms with Store Icons */}
             <div className="space-y-3 border-b border-t border-[#E2E8F0] py-4">
               <p className="text-xs font-bold uppercase tracking-wider text-[#64748B]">
                 Availability Platforms
@@ -279,7 +210,6 @@ export default function GameContent({ game }) {
               )}
             </div>
 
-            {/* Metadata & Forum CTA Grid */}
             <div className="grid grid-cols-1 gap-4 pt-2 sm:grid-cols-2">
               {game.category && (
                 <div className="space-y-1 rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-sm">
@@ -332,7 +262,6 @@ export default function GameContent({ game }) {
               )}
             </div>
 
-            {/* Key Features Bullet List */}
             {keyFeatures.length > 0 && (
               <section
                 aria-labelledby="key-features-heading"
@@ -362,6 +291,13 @@ export default function GameContent({ game }) {
                 </ul>
               </section>
             )}
+
+            <div className="md:hidden">
+              <FeaturesSection
+                technicalSpecs={technicalSpecs}
+                accessibilityFeatures={accessibilityFeatures}
+              />
+            </div>
           </div>
         </div>
       </div>
