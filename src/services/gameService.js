@@ -24,7 +24,7 @@ export async function fetchAllGames() {
   const { data, error } = await supabase
     .from("games")
     .select("*")
-    .order("created_at", { ascending: false });
+    .order("display_order", { ascending: true, nullsFirst: false });
 
   if (error) {
     console.error("Error fetching games:", error);
@@ -38,7 +38,7 @@ export async function fetchLatestGames(count = 2) {
   const { data, error } = await supabase
     .from("games")
     .select("*")
-    .order("created_at", { ascending: false })
+    .order("display_order", { ascending: true, nullsFirst: false })
     .limit(count);
 
   if (error) {
