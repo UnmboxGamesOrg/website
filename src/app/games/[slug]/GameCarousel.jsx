@@ -4,18 +4,45 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 
 export default function GameCarousel({ game }) {
-  const images = game?.gallery?.length
-    ? game.gallery.map((item, idx) =>
-        typeof item === "string"
-          ? {
-              src: item,
-              altText: `${game.title || "Game"} screenshot ${idx + 1}`,
-            }
-          : item,
-      )
-    : game?.heroImage
-      ? [{ src: game.heroImage, altText: game.title || "Game image" }]
-      : [];
+  // 1. Helper function to safely extract a string URL and alt text from any image item
+  const normalizeImage = (item, defaultAlt) => {
+    if (!item) return null;
+
+    // If it's already a string URL
+    if (typeof item === "string") {
+      return { src: item, altText: defaultAlt };
+    }
+
+    // If it's an object like { src: "...", altText: "..." }
+    if (typeof item === "object") {
+      const srcString =
+        typeof item.src === "string" ? item.src : item.url || item.src?.src;
+      if (!srcString) return null;
+      return {
+        src: srcString,
+        altText: item.altText || item.alt || defaultAlt,
+      };
+    }
+
+    return null;
+  };
+
+  // 2. Safely resolve raw items (handles null/undefined gallery & falls back to heroImage or thumbnail)
+  const rawList =
+    Array.isArray(game?.gallery) && game.gallery.length > 0
+      ? game.gallery
+      : game?.heroImage
+        ? [game.heroImage]
+        : game?.thumbnail
+          ? [game.thumbnail]
+          : [];
+
+  // 3. Normalize all items into clean { src: string, altText: string } objects
+  const images = rawList
+    .map((item, idx) =>
+      normalizeImage(item, `${game?.title || "Game"} image ${idx + 1}`),
+    )
+    .filter(Boolean); // Filter out any empty/invalid items
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -38,6 +65,7 @@ export default function GameCarousel({ game }) {
     return () => clearInterval(timer);
   }, [isHovered, nextSlide, images.length]);
 
+  // If there are no valid images with a string src, render nothing
   if (!images.length || !images[0]?.src) return null;
 
   return (
@@ -60,7 +88,7 @@ export default function GameCarousel({ game }) {
           {images.map((img, idx) => (
             <div key={idx} className="relative h-full w-full flex-shrink-0">
               <Image
-                src={img.src ? img.src : "/logo.png"}
+                src={img.src}
                 alt={img.altText || `Slide ${idx + 1}`}
                 fill
                 priority={idx === 0}
