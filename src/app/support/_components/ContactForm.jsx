@@ -13,6 +13,17 @@ export default function ContactForm() {
   const [status, setStatus] = useState("idle"); // "idle" | "loading" | "success" | "error"
   const [errorMessage, setErrorMessage] = useState("");
 
+  useEffect(() => {
+    if (status === "success" || status === "error") {
+      const timer = setTimeout(() => {
+        setStatus("idle");
+        setErrorMessage("");
+      }, 5000);
+
+      return () => clearTimeout(timer); 
+    }
+  }, [status]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
