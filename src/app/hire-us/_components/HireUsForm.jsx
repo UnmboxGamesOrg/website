@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function HireUsForm() {
   const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ export default function HireUsForm() {
     projectDetails: "",
   });
 
-  const [status, setStatus] = useState("idle"); // "idle" | "loading" | "success" | "error"
+  const [status, setStatus] = useState("idle"); 
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -37,6 +37,17 @@ export default function HireUsForm() {
       setErrorMessage(err.message || "Something went wrong. Please try again.");
     }
   };
+
+  useEffect(() => {
+      if (status === "success" || status === "error") {
+        const timer = setTimeout(() => {
+          setStatus("idle");
+          setErrorMessage("");
+        }, 5000);
+  
+        return () => clearTimeout(timer); 
+      }
+    }, [status]);
 
   const isSubmitting = status === "loading";
 
@@ -130,7 +141,7 @@ export default function HireUsForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded-lg bg-[#FFCD35] py-3.5 text-sm font-extrabold text-[#092D4A] shadow-md transition-all hover:bg-[#f3be21] hover:shadow-lg active:scale-[0.99] disabled:opacity-50"
+          className="w-full cursor-pointer rounded-lg bg-[#FFCD35] py-3.5 text-sm font-extrabold text-[#092D4A] shadow-md transition-all hover:bg-[#f3be21] hover:shadow-lg active:scale-[0.99] disabled:opacity-50"
         >
           {isSubmitting ? "Sending..." : "Send Proposal"}
         </button>
