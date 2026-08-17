@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import HireUsForm from "./_components/HireUsForm";
 
 // Studio Skills Data
 const SKILLS = [
@@ -106,7 +107,6 @@ export default function HireUsPage() {
     console.log("Proposal Submitted:", formData);
     setTimeout(() => {
       setIsSubmitting(false);
-      alert("Proposal sent successfully!");
       setFormData({ fullName: "", email: "", projectDetails: "" });
     }, 1000);
   };
@@ -151,7 +151,6 @@ export default function HireUsPage() {
         </div>
       </section>
 
-      {/* 2. Studio Skills Section */}
       <section className="bg-slate-50/50 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="space-y-3">
@@ -200,79 +199,7 @@ export default function HireUsPage() {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Full Name */}
-              <div className="space-y-2">
-                <label
-                  htmlFor="fullName"
-                  className="block text-xs font-bold text-[#092D4A]"
-                >
-                  Full Name
-                </label>
-                <input
-                  id="fullName"
-                  type="text"
-                  required
-                  placeholder="e.g. Jane Doe"
-                  value={formData.fullName}
-                  onChange={(e) =>
-                    setFormData({ ...formData, fullName: e.target.value })
-                  }
-                  className="w-full rounded-lg border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition-colors focus:border-[#092D4A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#092D4A]/20"
-                />
-              </div>
-
-              {/* Email Address */}
-              <div className="space-y-2">
-                <label
-                  htmlFor="email"
-                  className="block text-xs font-bold text-[#092D4A]"
-                >
-                  Email Address
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  required
-                  placeholder="alex@company.com"
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  className="w-full rounded-lg border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition-colors focus:border-[#092D4A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#092D4A]/20"
-                />
-              </div>
-
-              {/* Project Details */}
-              <div className="space-y-2">
-                <label
-                  htmlFor="projectDetails"
-                  className="block text-xs font-bold text-[#092D4A]"
-                >
-                  Project Details
-                </label>
-                <textarea
-                  id="projectDetails"
-                  rows={5}
-                  required
-                  placeholder="Briefly describe your project scope, target platforms, timeline, and key technical goals..."
-                  value={formData.projectDetails}
-                  onChange={(e) =>
-                    setFormData({ ...formData, projectDetails: e.target.value })
-                  }
-                  className="w-full rounded-lg border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition-colors focus:border-[#092D4A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#092D4A]/20"
-                />
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full rounded-lg bg-[#FFCD35] py-3.5 text-sm font-extrabold text-[#092D4A] shadow-md transition-all hover:bg-[#f3be21] hover:shadow-lg active:scale-[0.99] disabled:opacity-50"
-              >
-                {isSubmitting ? "Sending..." : "Send Proposal"}
-              </button>
-            </form>
+              <HireUsForm/>
           </div>
         </div>
       </section>

@@ -188,7 +188,7 @@ export default function PrivacyContent() {
             </p>
             <ul className="list-disc list-inside space-y-1 pl-2 text-base font-medium text-[#475569]">
               <li>Namecheap (domain registration)</li>
-              <li>Google Sites (website hosting)</li>
+              <li>Vercel (website hosting)</li>
             </ul>
             <p className="text-base">
               These providers may automatically process minimal technical

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -10,8 +10,19 @@ export default function ContactForm() {
     message: "",
   });
 
-  const [status, setStatus] = useState("idle"); // "idle" | "loading" | "success" | "error"
+  const [status, setStatus] = useState("idle"); 
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    if (status === "success" || status === "error") {
+      const timer = setTimeout(() => {
+        setStatus("idle");
+        setErrorMessage("");
+      }, 5000);
+
+      return () => clearTimeout(timer); 
+    }
+  }, [status]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -97,7 +108,6 @@ export default function ContactForm() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {/* Name Field */}
           <div className="space-y-2">
             <label
               htmlFor="name"
@@ -117,7 +127,6 @@ export default function ContactForm() {
             />
           </div>
 
-          {/* Email Field */}
           <div className="space-y-2">
             <label
               htmlFor="email"
@@ -138,7 +147,6 @@ export default function ContactForm() {
           </div>
         </div>
 
-        {/* Subject Field */}
         <div className="space-y-2">
           <label
             htmlFor="subject"
@@ -158,7 +166,6 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* Message Field */}
         <div className="space-y-2">
           <label
             htmlFor="message"
@@ -178,7 +185,6 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={status === "loading"}
