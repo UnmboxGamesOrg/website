@@ -151,7 +151,6 @@ export default function HireUsPage() {
         </div>
       </section>
 
-      {/* 2. Studio Skills Section */}
       <section className="bg-slate-50/50 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="space-y-3">
