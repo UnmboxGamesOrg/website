@@ -7,7 +7,7 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export async function fetchSiteSetting(key) {
   const { data, error } = await supabase
-    .from("site_settings")
+    .from("hero_image")
     .select("value")
     .eq("key", key)
     .single();
