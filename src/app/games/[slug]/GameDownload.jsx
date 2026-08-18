@@ -26,11 +26,13 @@ export default function GameDownload({ game }) {
 
   const getPrimaryKey = () => {
     if (userOS === "ios" && downloads.ios) return "ios";
+    if (userOS === "android" && downloads.android) return "android";
     if (userOS === "windows" && downloads.pc) return "pc";
     if (userOS === "mac" && (downloads.mac || downloads.pc))
       return downloads.mac ? "mac" : "pc";
 
     if (downloads.ios) return "ios";
+    if (downloads.android) return "android";
     if (downloads.pc) return "pc";
     return Object.keys(downloads)[0];
   };
@@ -41,6 +43,7 @@ export default function GameDownload({ game }) {
   const getDownloadLabel = (key, val) => {
     if (typeof val === "object" && val?.label) return val.label;
     if (key === "ios") return "Download on the App Store";
+    if (key === "android") return "Get it on Google Play";
     if (key === "pc") return "Download for PC (itch.io)";
     if (key === "trailer") return "Watch Video Gameplay";
     if (key === "community") return "Join Discord Community";
@@ -49,6 +52,7 @@ export default function GameDownload({ game }) {
 
   const getDownloadUrl = (val) =>
     typeof val === "string" ? val : val?.url || "#";
+
   const getAriaLabel = (key, val, title) => {
     if (typeof val === "object" && val?.ariaLabel) return val.ariaLabel;
     return `Download ${title} on ${key} (opens in new tab)`;
@@ -80,7 +84,6 @@ export default function GameDownload({ game }) {
           Release Pending / In Development
         </div>
       )}
-
     </div>
   );
 }
