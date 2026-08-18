@@ -4,10 +4,9 @@ import Image from "next/image";
 import { fetchSiteSetting } from "@/services/heroService";
 
 export default async function Hero() {
-  const [hero_image] = await Promise.all([
-    fetchSiteSetting("hero_image"),
-  ]);
-
+  const heroImageRaw = await fetchSiteSetting("hero_image");
+  const heroImage = heroImageRaw ? JSON.parse(heroImageRaw) : null;
+  
   return (
     <section className="bg-surface-light dark:bg-surface-dark py-16 sm:py-24 transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -44,9 +43,9 @@ export default async function Hero() {
           <div className="flex justify-center lg:justify-end">
             <div className="relative h-72 w-72 sm:h-96 sm:w-96">
               <Image
-                src={hero_image.src || "/logo.png"}
+                src={heroImage.src}
                 alt={
-                  hero_image.alt ||
+                  heroImage.alt ||
                   "Unmbox Games lightbulb emerging from an open box"
                 }
                 fill
