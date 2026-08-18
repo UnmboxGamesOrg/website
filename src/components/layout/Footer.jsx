@@ -4,14 +4,12 @@ import Link from "next/link";
 const FOOTER_NAV = {
   explore: [
     { label: "Games", href: "/games" },
-    { label: "Studio", href: "/studio" },
   ],
   legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms of Service", href: "/terms-of-service" },
   ],
   resources: [
-    { label: "Accessibility Statement", href: "/accessibility" },
     { label: "Support", href: "/support/contact-us" },
   ],
   socials: [
