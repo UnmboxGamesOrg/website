@@ -19,7 +19,6 @@ export default function TermsContent() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] py-12 transition-colors duration-200">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
           className="text-sm font-semibold text-[#64748B]"
@@ -40,7 +39,6 @@ export default function TermsContent() {
           </ol>
         </nav>
 
-        {/* Page Header */}
         <header className="space-y-3">
           <h1 className="text-4xl font-extrabold tracking-tight text-[#092D4A] sm:text-5xl">
             Terms of Service
@@ -54,7 +52,6 @@ export default function TermsContent() {
           />
         </header>
 
-        {/* Table of Contents Container */}
         <section
           aria-labelledby="toc-heading"
           className="rounded-xl border border-[#E2E8F0] bg-[#F1F5F9]/60 p-6 sm:p-8"
@@ -79,7 +76,6 @@ export default function TermsContent() {
           </ul>
         </section>
 
-        {/* Main Document Body */}
         <div className="space-y-12 leading-relaxed text-[#334155]">
           <p className="text-base font-medium text-[#334155]">
             Welcome to unmboxgames.com (the “Website”). This Website is operated
@@ -89,7 +85,6 @@ export default function TermsContent() {
             Website.
           </p>
 
-          {/* Section 1 */}
           <section id="eligibility" className="space-y-4 scroll-mt-24">
             <h2 className="text-2xl font-bold text-[#092D4A]">
               1. Eligibility
@@ -104,7 +99,6 @@ export default function TermsContent() {
             </p>
           </section>
 
-          {/* Section 2 */}
           <section id="use-of-website" className="space-y-4 scroll-mt-24">
             <h2 className="text-2xl font-bold text-[#092D4A]">
               2. Use of the Website
@@ -129,7 +123,6 @@ export default function TermsContent() {
             </ul>
           </section>
 
-          {/* Section 3 */}
           <section
             id="intellectual-property"
             className="space-y-4 scroll-mt-24"
@@ -147,7 +140,6 @@ export default function TermsContent() {
             </p>
           </section>
 
-          {/* Section 4 */}
           <section id="third-party-services" className="space-y-4 scroll-mt-24">
             <h2 className="text-2xl font-bold text-[#092D4A]">
               4. Third-Party Services
@@ -163,7 +155,6 @@ export default function TermsContent() {
             </p>
           </section>
 
-          {/* Section 5 */}
           <section
             id="disclaimer-warranties"
             className="space-y-4 scroll-mt-24"
@@ -185,7 +176,6 @@ export default function TermsContent() {
             </ul>
           </section>
 
-          {/* Section 6 */}
           <section id="limitation-liability" className="space-y-4 scroll-mt-24">
             <h2 className="text-2xl font-bold text-[#092D4A]">
               6. Limitation of Liability
@@ -201,7 +191,6 @@ export default function TermsContent() {
             </p>
           </section>
 
-          {/* Section 7 */}
           <section id="changes-to-terms" className="space-y-4 scroll-mt-24">
             <h2 className="text-2xl font-bold text-[#092D4A]">
               7. Changes to These Terms
@@ -214,7 +203,6 @@ export default function TermsContent() {
             </p>
           </section>
 
-          {/* Section 8 */}
           <section id="governing-law" className="space-y-4 scroll-mt-24">
             <h2 className="text-2xl font-bold text-[#092D4A]">
               8. Governing Law
@@ -226,7 +214,6 @@ export default function TermsContent() {
             </p>
           </section>
 
-          {/* Section 9 (Dark Card Section matching design) */}
           <section
             id="contact-us"
             className="rounded-xl border border-[#092D4A] bg-[#020C1D] p-8 text-white shadow-lg scroll-mt-24 space-y-6"
@@ -252,7 +239,6 @@ export default function TermsContent() {
           </section>
         </div>
 
-        {/* Footer Meta & Print Action */}
         <div className="flex items-center justify-between border-t border-[#E2E8F0] pt-8 text-xs font-bold text-[#64748B]">
           <span>VERSION 2.4.0</span>
           <button

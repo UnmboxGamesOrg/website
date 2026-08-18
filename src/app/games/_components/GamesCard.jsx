@@ -89,7 +89,6 @@ export function GameCard({ game }) {
                 ["web", "browser"].includes(k),
               );
 
-              // Build dynamic label e.g., "Supported on Desktop and Mobile"
               const platformLabels = [
                 hasDesktop && "Desktop",
                 hasMobile && "Mobile",
@@ -103,7 +102,6 @@ export function GameCard({ game }) {
                   className="flex items-center gap-1.5 text-content-muted dark:text-content-darkMuted"
                   aria-label={`Supported on ${platformLabels.join(" and ")}`}
                 >
-                  {/* Desktop / PC Icon */}
                   {hasDesktop && (
                     <svg
                       className="h-4 w-4"
@@ -121,7 +119,6 @@ export function GameCard({ game }) {
                     </svg>
                   )}
 
-                  {/* Mobile Icon (Triggers for iOS or Android links) */}
                   {hasMobile && (
                     <svg
                       className="h-4 w-4"
@@ -139,7 +136,6 @@ export function GameCard({ game }) {
                     </svg>
                   )}
 
-                  {/* Web / Browser Icon */}
                   {hasWeb && (
                     <svg
                       className="h-4 w-4"

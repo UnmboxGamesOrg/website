@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import HireUsForm from "./_components/HireUsForm";
 
-// Studio Skills Data
 const SKILLS = [
   {
     id: "game-design",
@@ -103,7 +102,6 @@ export default function HireUsPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Handle proposal submission (e.g., API route / email service)
     console.log("Proposal Submitted:", formData);
     setTimeout(() => {
       setIsSubmitting(false);
@@ -113,10 +111,8 @@ export default function HireUsPage() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans">
-      {/* 1. Hero / Partner Section */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-          {/* Left Hero Content */}
           <div className="space-y-6 lg:col-span-7">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-amber-500">
@@ -135,10 +131,8 @@ export default function HireUsPage() {
             </p>
           </div>
 
-          {/* Right Hero Illustration */}
           <div className="flex justify-center lg:col-span-5 lg:justify-end">
             <div className="relative h-64 w-64 sm:h-80 sm:w-80">
-              {/* Replace with your exact graphic/illustration path */}
               <Image
                 src="/logo.png"
                 alt="Unmbox Games Lightbulb Box"
