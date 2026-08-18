@@ -1,8 +1,7 @@
 import React from "react";
 
 export default function FeaturesSection({technicalSpecs , accessibilityFeatures}) {
-    console.log(technicalSpecs);
-  return (
+return (
     <>
       {technicalSpecs.length > 0 && (
         <section
