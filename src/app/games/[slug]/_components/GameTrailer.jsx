@@ -5,7 +5,6 @@ export default function GameTrailer({ game }) {
 
   if (!trailerUrl) return null;
 
-  console.log(trailerUrl);
 
   const getYouTubeEmbedUrl = (url) => {
     const getVideoId = (url) => {
@@ -28,7 +27,6 @@ export default function GameTrailer({ game }) {
 
   const embedUrl = getYouTubeEmbedUrl(trailerUrl);
 
-  console.log(embedUrl);
 
   if (!embedUrl) return null;
 
