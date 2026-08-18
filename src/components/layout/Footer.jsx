@@ -12,7 +12,7 @@ const FOOTER_NAV = {
   ],
   resources: [
     { label: "Accessibility Statement", href: "/accessibility" },
-    { label: "Support", href: "/support" },
+    { label: "Support", href: "/support/contact-us" },
   ],
   socials: [
     { label: "Discord", href: "https://discord.gg/unmboxgames" },
