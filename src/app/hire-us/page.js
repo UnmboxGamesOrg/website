@@ -102,7 +102,6 @@ export default function HireUsPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    console.log("Proposal Submitted:", formData);
     setTimeout(() => {
       setIsSubmitting(false);
       setFormData({ fullName: "", email: "", projectDetails: "" });
