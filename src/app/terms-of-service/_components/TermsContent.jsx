@@ -191,7 +191,6 @@ export default function TermsContent() {
             </p>
           </section>
 
-          * Section 7 */}
           <section id="changes-to-terms" className="space-y-4 scroll-mt-24">
             <h2 className="text-2xl font-bold text-[#092D4A]">
               7. Changes to These Terms
