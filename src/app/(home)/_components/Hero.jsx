@@ -1,8 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { fetchSiteSetting } from "@/services/heroService";
 
-export default function Hero() {
+export default async function Hero() {
+  const [hero_image] = await Promise.all([
+    fetchSiteSetting("hero_image"),
+  ]);
+
   return (
     <section className="bg-surface-light dark:bg-surface-dark py-16 sm:py-24 transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -39,8 +44,11 @@ export default function Hero() {
           <div className="flex justify-center lg:justify-end">
             <div className="relative h-72 w-72 sm:h-96 sm:w-96">
               <Image
-                src="/logo.png"
-                alt="Unmbox Games lightbulb emerging from an open box"
+                src={hero_image.url || "/logo.png"}
+                alt={
+                  hero_image.alt ||
+                  "Unmbox Games lightbulb emerging from an open box"
+                }
                 fill
                 priority
                 className="object-contain"
