@@ -296,7 +296,6 @@ export default function PrivacyContent() {
             </div>
           </section>
 
-          {/* Section 10 */}
           <section
             id="legal-info"
             className="space-y-2 scroll-mt-24 border-t border-[#E2E8F0] pt-6"
@@ -309,7 +308,6 @@ export default function PrivacyContent() {
           </section>
         </div>
 
-        {/* Footer Meta & Print Action */}
         <div className="flex items-center justify-between border-t border-[#E2E8F0] pt-8 text-xs font-bold text-[#64748B]">
           <span>VERSION 2.4.0</span>
           <button

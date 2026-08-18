@@ -38,7 +38,6 @@ export default function GameDownload({ game }) {
   const primaryKey = getPrimaryKey();
   const primaryRaw = downloads[primaryKey];
 
-  // Formatting Helpers
   const getDownloadLabel = (key, val) => {
     if (typeof val === "object" && val?.label) return val.label;
     if (key === "ios") return "Download on the App Store";

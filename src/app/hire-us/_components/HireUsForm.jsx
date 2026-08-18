@@ -74,7 +74,6 @@ export default function HireUsForm() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-5">
-        {/* Full Name */}
         <div className="space-y-2">
           <label
             htmlFor="fullName"
@@ -95,7 +94,6 @@ export default function HireUsForm() {
           />
         </div>
 
-        {/* Email Address */}
         <div className="space-y-2">
           <label
             htmlFor="email"
@@ -116,7 +114,6 @@ export default function HireUsForm() {
           />
         </div>
 
-        {/* Project Details */}
         <div className="space-y-2">
           <label
             htmlFor="projectDetails"
@@ -137,7 +134,6 @@ export default function HireUsForm() {
           />
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={isSubmitting}

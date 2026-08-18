@@ -32,7 +32,6 @@ export default function Footer() {
     <footer className="w-full bg-[#020C1D] text-white">
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-16">
         <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-start">
-          {/* Brand & Mission Statement */}
           <div className="max-w-sm space-y-3">
             <Link
               href="/"

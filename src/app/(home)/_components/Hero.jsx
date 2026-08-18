@@ -44,7 +44,7 @@ export default async function Hero() {
           <div className="flex justify-center lg:justify-end">
             <div className="relative h-72 w-72 sm:h-96 sm:w-96">
               <Image
-                src={hero_image.url || "/logo.png"}
+                src={hero_image.src || "/logo.png"}
                 alt={
                   hero_image.alt ||
                   "Unmbox Games lightbulb emerging from an open box"
