@@ -140,7 +140,7 @@ export default function ContactUsPage() {
 
             <div className="pt-6">
               <a
-                href="c"
+                href="https://discord.gg/KhwHS5GDvm"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Contact us on Discord (opens in a new tab)"
