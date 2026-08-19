@@ -2,18 +2,14 @@ import React from "react";
 import Link from "next/link";
 
 const FOOTER_NAV = {
-  explore: [
-    { label: "Games", href: "/games" },
-  ],
+  explore: [{ label: "Games", href: "/games" }],
   legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms of Service", href: "/terms-of-service" },
   ],
-  resources: [
-    { label: "Support", href: "/support/contact-us" },
-  ],
+  resources: [{ label: "Support", href: "/support/contact-us" }],
   socials: [
-    { label: "Discord", href: "https://discord.gg/unmboxgames" },
+    { label: "Discord", href: "https://discord.gg/KhwHS5GDvm" },
     { label: "Youtube", href: "https://www.youtube.com/@UnmboxGames" },
     {
       label: "Facebook",
