@@ -41,9 +41,10 @@ export default function PurchaseSuccessPage() {
           <p className="text-sm text-content-muted dark:text-content-darkMuted leading-relaxed max-w-md mx-auto">
             Your payment was processed successfully.
           </p>
+          <p className="text-sm text-content-muted dark:text-content-darkMuted leading-relaxed max-w-md mx-auto">
+            You can close this page and restart the game application.
+          </p>
         </div>
-
-       
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
           <Link
             href="/games"

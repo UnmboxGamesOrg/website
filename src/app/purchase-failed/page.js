@@ -42,6 +42,10 @@ export default function PurchaseFailedPage() {
             Your card was not charged. This can happen due to an interrupted
             connection, insufficient funds, or a cancelled payment attempt.
           </p>
+
+          <p className="text-sm text-content-muted dark:text-content-darkMuted leading-relaxed max-w-md mx-auto">
+            You can close this page and restart the game application.
+          </p>
         </div>
 
         <div className="rounded-xl border border-rose-200 dark:border-rose-900/40 bg-rose-50 dark:bg-rose-950/20 p-6 text-left space-y-2 shadow-sm">
